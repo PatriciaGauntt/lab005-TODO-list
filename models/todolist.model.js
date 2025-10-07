@@ -31,21 +31,20 @@ export class ToDoListModel {
         return toDoList;
     }
     static updateToDoList(id, toDoList) {
-        console.log(`Model : updateToDoList, id: ${id}`);
-        const idx = data.findIndex((toDoList) => toDoList.id === id);
-        if (idx < 0) {
-            return false;
-    }
-    Object.keys(toDoList).forEach((key) => {
+      console.log(`Model : updateToDoList, id: ${id}`);
+      const idx = data.findIndex((toDoList) => toDoList.id === id);
+      if (idx < 0) {
+          return false;
+      }
+      Object.keys(toDoList).forEach((key) => {
       if (key === 'id') {
         return;
       }
       data[idx][key] = toDoList[key];
-    });
+      });
 
-    return data[idx];
-  }
-
+      return data[idx];
+    }
     static replaceToDoList = (id, toDoList) => {
         console.log(`Model : replaceToDoList, id: ${id}`);
         const idx = data.findIndex(toDoList => toDoList.id === id);

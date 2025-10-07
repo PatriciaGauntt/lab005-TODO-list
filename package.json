@@ -87,5 +87,15 @@
   "bugs": {
     "url": "https://github.com/PatriciaGauntt/lab005-TODO-list/issues"
   },
-  "homepage": "https://github.com/PatriciaGauntt/lab005-TODO-list#readme"
+  "homepage": "https://github.com/PatriciaGauntt/lab005-TODO-list#readme",
+  "devDependencies": {
+    "@eslint/compat": "^1.4.0",
+    "@eslint/js": "^9.37.0",
+    "@stylistic/eslint-plugin": "^3.1.0",
+    "eslint": "^9.37.0",
+    "eslint-config-airbnb-extended": "^2.3.1",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import-x": "^4.16.1",
+    "eslint-plugin-n": "^17.23.1"
+  }
 }
