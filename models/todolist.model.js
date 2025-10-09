@@ -1,3 +1,6 @@
+import { mongo } from '../lib/mongo.js';
+import { Constants } from '../lib/constants.js';
+
 const data = [
   {
     id: 'abc',
@@ -18,8 +21,8 @@ const data = [
 
 export class ToDoListModel {
   static getToDoLists() {
-    console.log('Model : getToDoLists');
-    return data;
+    console.log('ToDoListModel : getToDoLists()');
+    return mongo.getDb().collection(Constants.TODOLIST_COLLECTIONS).find({});
   }
 
   static getToDoList(id) {

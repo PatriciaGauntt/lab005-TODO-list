@@ -1,10 +1,11 @@
 import { ToDoListService } from '../services/todolist.service.js';
 
 export class ToDoListController {
-  static getToDoLists(req, res, next) {
+  static async getToDoLists(req, res, next) {
     console.log('Controller : getToDoLists');
-    const result = ToDoListService.getToDoLists();
-    res.status(200).json(result);
+    const resultCursor = await ToDoListService.getToDoLists();
+    console.log(`----> ${resultCursor}`);
+    res.status(200).json(resultCursor.toArray());
   }
 
   static getToDoList(req, res) {
