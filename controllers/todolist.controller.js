@@ -5,7 +5,7 @@ export class ToDoListController {
     console.log('Controller : getToDoLists');
     const resultCursor = await ToDoListService.getToDoLists();
     console.log(`----> ${resultCursor}`);
-    res.status(200).json(resultCursor.toArray());
+    res.status(200).json(await resultCursor.toArray());
   }
 
   static getToDoList(req, res) {
