@@ -4,13 +4,12 @@ export class ToDoListController {
   static async getToDoLists(req, res, next) {
     console.log('Controller : getToDoLists');
     const resultCursor = await ToDoListService.getToDoLists();
-    console.log(`----> ${resultCursor}`);
     res.status(200).json(await resultCursor.toArray());
   }
 
-  static getToDoList(req, res) {
+  static async getToDoList(req, res) {
     console.log(`Controller : getToDoList, id: ${req.params.id}`);
-    const result = ToDoListService.getToDoList(req.params.id);
+    const result = await ToDoListService.getToDoList(req.params.id);
     if (!result) {
       res.sendStatus(404);
       return;
@@ -18,15 +17,15 @@ export class ToDoListController {
     res.status(200).json(result);
   }
 
-  static createToDoList(req, res) {
+  static async createToDoList(req, res) {
     console.log('Controller : createToDoLists');
-    const result = ToDoListService.createToDoList(req.body);
+    const result = await ToDoListService.createToDoList(req.body);
     res.status(201).json(result);
   }
 
-  static updateToDoList(req, res) {
+  static async updateToDoList(req, res) {
     console.log(`Controller: updateToDoList, id: ${req.params.id}`);
-    const result = ToDoListService.updateToDoList(req.params.id, req.body);
+    const result = await ToDoListService.updateToDoList(req.params.id, req.body);
     if (result) {
       res.status(200).json(result);
       return;
@@ -34,9 +33,9 @@ export class ToDoListController {
     res.sendStatus(404);
   }
 
-  static replaceToDoList(req, res) {
+  static async replaceToDoList(req, res) {
     console.log(`Controller : replaceToDoList, id: ${req.params.id}`);
-    const result = ToDoListService.replaceToDoList(req.params.id, req.body);
+    const result = await ToDoListService.replaceToDoList(req.params.id, req.body);
     if (!result) {
       res.sendStatus(404);
       return;
@@ -44,9 +43,13 @@ export class ToDoListController {
     res.status(200).json(result);
   }
 
-  static deleteToDoList(req, res) {
+  static async deleteToDoList(req, res) {
     console.log(`Controller : deleteToDoList, id: ${req.params.id}`);
-    const result = ToDoListService.deleteToDoList(req.params.id);
-    res.sendStatus(204);
+    const result = await ToDoListService.deleteToDoList(req.params.id);
+    if (result) {
+      res.sendStatus(204);
+      return;
+    }
+    res.sendStatus(404);
   }
 }
