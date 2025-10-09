@@ -10,4 +10,3 @@ toDoListRouter.post('/', ToDoListController.createToDoList);
 toDoListRouter.put('/:id', ToDoListController.replaceToDoList);
 toDoListRouter.patch('/:id', ToDoListController.updateToDoList);
 toDoListRouter.delete('/:id', ToDoListController.deleteToDoList);
-
