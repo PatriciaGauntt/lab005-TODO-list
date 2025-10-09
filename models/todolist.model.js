@@ -1,27 +1,10 @@
 import { Constants } from '../lib/constants.js';
+import { logger } from '../lib/logger.js';
 import { mongo } from '../lib/mongo.js';
-
-const data = [
-  {
-    id: 'abc',
-    item: 'do homework',
-    color: 'red',
-  },
-  {
-    id: 'bcd',
-    item: 'pay water bill',
-    color: 'blue',
-  },
-  {
-    id: 'cde',
-    item: 'buy milk',
-    color: 'green',
-  },
-];
 
 export class ToDoListModel {
   static getToDoLists() {
-    console.log('ToDoListModel : getToDoLists()');
+    logger.debug('ToDoListModel : getToDoLists()');
     return mongo.getDb().collection(Constants.TODOLIST_COLLECTIONS).find({}, {
       projection: {
         _id: 0,
@@ -30,7 +13,7 @@ export class ToDoListModel {
   }
 
   static getToDoList(id) {
-    console.log(`Model : getToDoList, id: ${id}`);
+    logger.debug(`Model : getToDoList, id: ${id}`);
     return mongo.getDb().collection(Constants.TODOLIST_COLLECTIONS).findOne({ id }, {
       projection: {
         _id: 0,
@@ -39,14 +22,14 @@ export class ToDoListModel {
   }
 
   static async createToDoList(toDoList) {
-    console.log('Model : createToDoList');
+    logger.debug('Model : createToDoList');
     await mongo.getDb().collection(Constants.TODOLIST_COLLECTIONS).insertOne(toDoList);
     delete toDoList._id;
     return toDoList;
   }
 
   static async updateToDoList(id, toDoList) {
-    console.log(`Model : updateToDoList, id: ${id}`);
+    logger.debug(`Model : updateToDoList, id: ${id}`);
     const updateStatement = {
       $set: {},
     };
@@ -68,7 +51,7 @@ export class ToDoListModel {
   }
 
   static replaceToDoList(id, toDoList) {
-    console.log(`Model : replaceToDoList, id: ${id}`);
+    logger.debug(`Model : replaceToDoList, id: ${id}`);
     const idx = data.findIndex(toDoList => toDoList.id === id);
     if (idx < 0) {
       return false;
@@ -79,7 +62,7 @@ export class ToDoListModel {
   }
 
   static async deleteToDoList(id) {
-    console.log(`Model : deleteToDoList, id: ${id}`);
+    logger.debug(`Model : deleteToDoList, id: ${id}`);
     const result = await mongo.getDb().collection(Constants.TODOLIST_COLLECTIONS).deleteOne(
       { id },
     );

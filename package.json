@@ -73,6 +73,8 @@
     "unpipe": "^1.0.0",
     "uuid": "^13.0.0",
     "vary": "^1.1.2",
+    "winston": "^3.18.3",
+    "winston-daily-rotate-file": "^5.0.0",
     "wrappy": "^1.0.2"
   },
   "scripts": {

@@ -1,7 +1,7 @@
 import express from 'express';
 import config from 'config';
 
-import { Constants } from './lib/constants.js';
+import { logger } from './lib/logger.js';
 import { mongo } from './lib/mongo.js';
 import { errorHandler } from './middleware/error.middleware.js';
 import { hexcolorAssign } from './middleware/hexcolor-assign.middleware.js';
@@ -27,5 +27,5 @@ const mongoOptions = {
 await mongo.init(mongoConfig.url, mongoConfig.database, mongoOptions);
 
 app.listen(port, () => {
-  console.log(`TODO List API listening at http://localhost:${port}`);
+  logger.info(`${new Date().toISOString()}: TODO List API listening at http://localhost:${port}`);
 });
