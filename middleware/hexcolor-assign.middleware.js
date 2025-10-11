@@ -1,10 +1,15 @@
-export const hexcolorAssign = (req, res, next) => {
-  const { color } = req.body || {}; // ✅ prevents TypeError if req.body is undefined
+import { logger } from '../lib/logger.js';
 
-  if (!color) {
-    req.body = { ...req.body, hexcolorAssign: 'color not supplied' };
+export const hexcolorAssign = (req, res, next) => {
+  const body = req.body || {};
+  const colorInput = body.color;
+
+  if (!colorInput || typeof colorInput !== 'string' || !colorInput.trim()) {
+    req.body = { ...body, hexcolorAssign: 'color not supplied' };
     return next();
   }
+
+  const color = colorInput.trim().toLowerCase();
 
   if (color === 'red') {
     req.body.hexcolorAssign = '#ff0000';
