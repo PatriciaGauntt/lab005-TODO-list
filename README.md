@@ -1,3 +1,10 @@
+### Logging
+- The app automatically creates a `/logs` folder on first run.
+- Log files are excluded from version control (`.gitignore`). 
+
+### 🗃 Sample Data
+A sample dataset is included in [`/data/todolists-data.json`]
+
 # lab005-TODO-list
 
 Create a "TODO" REST API service using Express and Body-Parser. We'll skip the database layer for now and just log the model logic to the console
