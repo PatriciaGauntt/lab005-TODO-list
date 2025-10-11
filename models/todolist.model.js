@@ -43,22 +43,23 @@ export class ToDoListModel {
     const result = await mongo.getDb().collection(Constants.TODOLIST_COLLECTIONS).updateOne(
       { id },
       updateStatement,
+      { returnDocument: 'after' },
     );
-    if (result.matchedCount) {
-      return true;
-    }
-    return false;
+
+    delete result._id;
+    return result;
   }
 
-  static replaceToDoList(id, toDoList) {
+  static async replaceToDoList(id, toDoList) {
     logger.debug(`Model : replaceToDoList, id: ${id}`);
-    const idx = data.findIndex(toDoList => toDoList.id === id);
-    if (idx < 0) {
+    const result = await mongo.getDb().collection(Constants.TODOLIST_COLLECTIONS)
+      .replaceOne({ id }, toDoList);
+
+    if (!result.modifiedCount) {
       return false;
     }
-    data.splice(idx, 1);
-    data.push(toDoList);
-    return toDoList;
+    delete result._id;
+    return result;
   }
 
   static async deleteToDoList(id) {

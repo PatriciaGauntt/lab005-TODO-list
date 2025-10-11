@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://my-app-domain/schemas/todolist",
+  "title": "ToDoList",
+  "description": "To Do List Schema Document",
+  "type": "object",
+  "required": [
+    "id",
+    "item",
+    "hexcolorAssign"
+  ],
+  "additionalProperties": false,
+  "properties": {
+     "id": {
+      "type": "string"
+    },
+      "color": {
+      "type": "string"
+    },
+    "hexcolorAssign": {
+      "type": "string"
+    },
+    "item": {
+      "type": "string"
+    },
+    "tracking": {
+    "required": [
+      "uuid",
+      "createdDate"
+    ],
+        "type": "object",
+        "properties": {
+            "uuid": {
+            "type": "string",
+            "format": "uuid"
+        },
+            "createdDate": {
+                "type": "object",
+                "format": "date-time"
+        },
+            "updatedDate": {
+                "type": "object",
+                "format": "date-time"
+        }
+        }
+    }
+    }
+}
