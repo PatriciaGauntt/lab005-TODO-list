@@ -22,6 +22,11 @@ export class ToDoListService {
   }
 
   static createToDoList(toDoList) {
+    if (!toDoList.item || !toDoList.item.trim()) {
+      const error = new Error('The "item" field cannot be empty or just spaces.');
+      error.statusCode = 400;
+      throw error;
+  }
     const newToDoList = {
       ...toDoList,
       id: uuid().slice(0, 5),
@@ -42,6 +47,11 @@ export class ToDoListService {
   }
 
   static async updateToDoList(id, toDoList) {
+    if (toDoList.item !== undefined && !toDoList.item.trim()) {
+      const error = new Error('The "item" field cannot be empty or just spaces.');
+      error.statusCode = 400;
+      throw error;
+    }
     const existingToDoList = await ToDoListModel.getToDoList(id);
 
     if (!existingToDoList) {
@@ -69,6 +79,11 @@ export class ToDoListService {
   }
 
   static async replaceToDoList(id, toDoList) {
+    if (toDoList.item !== undefined && !toDoList.item.trim()) {
+      const error = new Error('The "item" field cannot be empty or just spaces.');
+      error.statusCode = 400;
+      throw error;
+    }
     const existingToDoList = await ToDoListModel.getToDoList(id);
 
     if (!existingToDoList) {

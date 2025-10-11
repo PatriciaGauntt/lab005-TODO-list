@@ -18,30 +18,48 @@ export class ToDoListController {
     res.status(200).json(result);
   }
 
-  static async createToDoList(req, res) {
-    logger.debug('Controller : createToDoLists');
-    const result = await ToDoListService.createToDoList(req.body);
-    res.status(201).json(result);
+  static async createToDoList(req, res, next) {
+    try {
+      logger.debug('Controller : createToDoList');
+      const result = await ToDoListService.createToDoList(req.body);
+      res.status(201).json(result);
+    } catch (err) {
+      logger.error(err.message);
+      res.status(err.statusCode || 500).json({
+        error: err.message,
+      });
+    }
   }
 
   static async updateToDoList(req, res) {
-    logger.debug(`Controller: updateToDoList, id: ${req.params.id}`);
-    const result = await ToDoListService.updateToDoList(req.params.id, req.body);
-    if (result) {
+    try {
+      logger.debug(`Controller: updateToDoList, id: ${req.params.id}`);
+      const result = await ToDoListService.updateToDoList(req.params.id, req.body);
       res.status(200).json(result);
-      return;
+    } catch (err) {
+      logger.error(err.message);
+      res.status(err.statusCode || 500).json({
+        error: err.message,
+      });
     }
-    res.sendStatus(404);
   }
 
   static async replaceToDoList(req, res) {
-    logger.debug(`Controller : replaceToDoList, id: ${req.params.id}`);
-    const result = await ToDoListService.replaceToDoList(req.params.id, req.body);
-    if (!result) {
-      res.sendStatus(404);
-      return;
+    try {
+      logger.debug(`Controller : replaceToDoList, id: ${req.params.id}`);
+      const result = await ToDoListService.replaceToDoList(req.params.id, req.body);
+      if (!result) {
+        res.sendStatus(404);
+        return;
+      }
+      res.status(200).json(result);
+    } catch (err) {
+      logger.error(`Error replacing ToDo item: ${err.message}`);
+      res.status(err.statusCode || 500).json({
+        error: err.message,
+        ...(err.details && { details: err.details })
+      });
     }
-    res.status(200).json(result);
   }
 
   static async deleteToDoList(req, res) {
