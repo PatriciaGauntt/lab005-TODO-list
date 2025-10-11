@@ -35,12 +35,10 @@
             "format": "uuid"
         },
             "createdDate": {
-                "type": "object",
-                "format": "date-time"
+                "type": "object"
         },
             "updatedDate": {
-                "type": "object",
-                "format": "date-time"
+                "type": "object"
         }
         }
     }
