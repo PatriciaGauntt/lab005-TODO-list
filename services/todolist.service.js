@@ -32,9 +32,9 @@ export class ToDoListService {
       id: uuid().slice(0, 5),
       tracking: {
         uuid: uuid(),
-        createdDate: new Date(),
-      }
-    };
+        createdDate: new Date().toISOString()
+    }
+  };
 
     const valid = validate(newToDoList);
     if (!valid) {
@@ -64,7 +64,7 @@ export class ToDoListService {
       id,
       tracking: {
         ...existingToDoList.tracking,
-        updatedDate: new Date(),
+        updatedDate: new Date().toISOString()
       },
     };
 
@@ -96,7 +96,7 @@ export class ToDoListService {
       id,
       tracking: {
         ...existingToDoList.tracking,
-        updatedDate: new Date(),
+        updatedDate: new Date().toISOString()
       }
     };
 

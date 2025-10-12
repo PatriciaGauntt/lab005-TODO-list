@@ -1,4 +1,5 @@
-import { logger} from '../lib/logger.js';
+import { logger } from '../lib/logger.js';
+// eslint-disable-next-line import-x/namespace
 import { ToDoListService } from '../services/todolist.service.js';
 
 export class ToDoListController {
@@ -57,7 +58,7 @@ export class ToDoListController {
       logger.error(`Error replacing ToDo item: ${err.message}`);
       res.status(err.statusCode || 500).json({
         error: err.message,
-        ...(err.details && { details: err.details })
+        ...(err.details && { details: err.details }),
       });
     }
   }
